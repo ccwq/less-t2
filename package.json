@@ -5,5 +5,8 @@
   },
   "dependencies": {
     "less": "^3.5.3"
+  },
+  "scripts": {
+    "dist":"lessc src/t2.dist.less src/t2.dist.css -x"
   }
 }

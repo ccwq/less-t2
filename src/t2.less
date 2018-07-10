@@ -23,8 +23,6 @@
 }
 
 
-
-
 //设置了单位
 .__write(@key,@value,@defaultUnit:px) when not(get-unit(@value)=~"") or not(isnumber(@value)){
     @{key}:@value;
@@ -55,7 +53,6 @@
         @key:extract(@keyList,@n);
         .__write(@key,@value,~"");
         ._loop(@n + 1);
-
     }
     ._loop(1)
 }
@@ -130,9 +127,6 @@
     .__writes(left top right bottom, @value)
 }
 
-
-
-
 //reset;
 .reset(){
     html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em,
@@ -154,9 +148,6 @@
     i,em{font-style: normal;}
     a{ text-decoration: none;}
 }
-
-
-
 
 
 //ie旋转
@@ -209,8 +200,6 @@
     &:extend(.iblock);
 }
 //----形成三角
-
-
 
 
 
@@ -321,8 +310,6 @@
     >*{white-space: normal;}
 }
 
-
-
 //
 ._colsets(@colList,@fullWidth,@innerGap:0,@edgeGap:0){
     @leng:@length(@colList);
@@ -391,11 +378,6 @@
     .gen(@main_width,@gap,@n,@edge_gap);
 
 }
-
-
-
-
-
 
 
 //半透明背景，兼容ie
@@ -1014,7 +996,7 @@
         @n:length(@value-list);
 
         //距离
-        .write(@key,@value) when(@gp = 1){
+        .write(@key,@value) when(@gp = "distance"){
 
             .__class_write_with_important(~"m@{key}", margin, @value);
             .__class_write_with_important(~"mh@{key}",margin-left margin-right, @value @value);
@@ -1034,7 +1016,7 @@
         }
 
         //大小
-        .write(@key,@value) when(@gp = 2){
+        .write(@key,@value) when(@gp = "size"){
             .__class_write_with_important(~"fz@{key}",      font-size, @value);
             .__class_write_with_important(~"w@{key}",       width, @value);
             .__class_write_with_important(~"h@{key}",       height, @value);
@@ -1045,13 +1027,13 @@
         }
 
         //透明
-        .write(@key,@value) when(@gp = 3){
+        .write(@key,@value) when(@gp = "opacity"){
             .__class_write_with_important(~"op@{key}",    opacity,  @value);
         }
 
 
         //缩放
-        .write(@key,@value) when(@gp = 4){
+        .write(@key,@value) when(@gp = "scale"){
             @v:unit(@value);
             .__class_write_with_important(~"scale@{key}",    transform,  ~"scale(@{v})");
         }
@@ -1064,7 +1046,7 @@
 
 
         //百分比
-        .write(@key,@value) when(@gp = 100){
+        .write(@key,@value) when(@gp = "%"){
 
             .__class_write_with_important(~"w@{key}",       width,  @value);
             .__class_write_with_important(~"h@{key}",       height,  @value);
@@ -1103,6 +1085,12 @@
                 .write(@valn2,@val);
             }
 
+            //offset
+            .tranKey(@val) when(@gp="offset"){
+                .offset-x-@{val}{left:unit(@val,px)}
+                .offset-y-@{val}{top:unit(@val,px)}
+            }
+
             .tranKey(@val);
             .loop(@n - 1);
         }
@@ -1111,24 +1099,26 @@
 
 
     //距离组   //.mt1.mb025
-    .toolkitGen(1,0em 0.125em 0.25em 0.5em 0.75em 1em 1.25em 1.5em 1.75em 2em 2.5em 3em 3.5em);
+    .toolkitGen("distance",0em 0.125em 0.25em 0.5em 0.75em 1em 1.25em 1.5em 1.8em 2em 2.1em 2.4em 2.5em 2.7em 3em 3.3em 3.5em 3.6em 3.9em 4em);
 
     //大小 //.fz075 fz95 fz10d5 w08 w15 w17d5 .scale09
-    .toolkitGen(2, 0.25em 0.5em 0.75em 0.8em 0.85em 0.9em 0.95em 1em 1.05em 1.1em 1.15em 1.2em  1.25em 1.3em 1.35em 1.4em 1.5em 1.6em 1.7em 1.75em 1.8em 2em 2.1em 2.25em 2.4em 2.5em 2.7em 3em 4em 4.5em 5em 6em 15em 18em 24em);
+    .toolkitGen("size", 0.25em 0.5em 0.75em 0.8em 0.85em 0.9em 0.95em 1em 1.05em 1.1em 1.15em 1.2em  1.25em 1.3em 1.35em 1.4em 1.5em 1.6em 1.7em 1.75em 1.8em 2em 2.1em 2.25em 2.4em 2.5em 2.7em 3em 3.3em 3.6em 3.9em 4em 4.5em 5em 6em 9em 12em 15em 18em 21em 24em);
 
     //透明 .op01.op05.op10
-    .toolkitGen(3,0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1);
+    .toolkitGen("opacity",0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1);
 
     //缩放 .scale01.scale10
-    .toolkitGen(4,0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.85 0.9 0.75 1 1.05 1.1 1.15 1.2 1.25 1.3 1.4 1.5 1.75 1.8 2 2.4 2.7 3 3.3 3.6 4.5);
+    .toolkitGen("scale",0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.85 0.9 0.75 1 1.05 1.1 1.15 1.2 1.25 1.3 1.4 1.5 1.75 1.8 2 2.4 2.7 3 3.3 3.6 4.5);
 
     //百分比 .w100p.h33d33p.l33d33p.t100p.pt16d66p
-    .toolkitGen(100,0% 10% 12.5% 14.285% 16.66% 20% 25% 33.33% 50% 66.66% 75% 100%);
+    .toolkitGen("%",0% 10% 12.5% 14.285% 16.66% 20% 25% 33.33% 50% 66.66% 75% 100%);
 
     //vh,vw	
     .toolkitGen("vwvh",0 10 12.5 14.285 16.66 20 25 30 33.33 36 50 66.66 75 100);
 
 
+    //offset
+    .toolkitGen("offset",-12 -11 -10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12);
 }
 
 
