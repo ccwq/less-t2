@@ -832,6 +832,37 @@
     .loopColorList(@colors-list);
 }
 
+
+//微软雅黑 雅黑英文 黑体 新宋体
+.ff-yh{   font-family: @font_yahei;}
+
+//宋体
+.ff-st{  font-family: @font_songti;}
+
+//新宋体
+.ff-xst{   font-family: @font_xinst;}
+
+//黑体
+.ff-ht{   font-family: @font_heiti;}
+
+//简正黑
+.ff-zh{ font-family: @font_zhenghei;}
+
+//字符串截取
+.txcut{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+//铺满到容器（一般用户fiex或者absolute定位）
+.fillin{._fillin;}
+
+.clear{font-size: 0; height: 0; width: 0; clear: both;}
+
+.fs-reset{
+    font-size: 0;
+    >*{
+        font-size: 1rem;
+    }
+}
+
 .shortcutClass(){
 
     .__class_write(bg-icon,     background-repeat background-position, no-repeat  ~"50% 50%");
@@ -840,35 +871,7 @@
     .__class_write_with_important(db,          display, block);
     .__class_write_with_important(center,      margin-left margin-right,auto auto);
 
-    //微软雅黑 雅黑英文 黑体 新宋体
-    .ff-yh{   font-family: @font_yahei;}
 
-    //宋体
-    .ff-st{  font-family: @font_songti;}
-
-    //新宋体
-    .ff-xst{   font-family: @font_xinst;}
-
-    //黑体
-    .ff-ht{   font-family: @font_heiti;}
-
-    //简正黑
-    .ff-zh{ font-family: @font_zhenghei;}
-
-    //字符串截取
-    .txcut{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-    //铺满到容器（一般用户fiex或者absolute定位）
-    .fillin{._fillin;}
-
-    .clear{font-size: 0; height: 0; width: 0; clear: both;}
-
-    .fs-reset{
-        font-size: 0;
-        >*{
-            font-size: 1rem;
-        }
-    }
 
     // 不可见，但是仍可以加载
     .v-hide{
@@ -888,6 +891,9 @@
     .__class_write_with_important(pa,position,absolute);
     .__class_write_with_important(pr,position,relative);
     .__class_write_with_important(ps,position,static);
+
+    .__class_write_with_important(db, display,block);
+    .__class_write_with_important(dib,display,inline-block);
 
 
     //
